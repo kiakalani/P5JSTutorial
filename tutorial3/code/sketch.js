@@ -4,9 +4,9 @@
  * tic tac toe game.
  */
 
- /**
-  * The width of the canvas.
-  */
+/**
+ * The width of the canvas.
+ */
 const WIDTH = 1024;
 /**
  * The height of the canvas.
@@ -82,9 +82,12 @@ function checkWin() {
     }
 
 }
+/**
+ * This method is responsible for checking whether the game is a tie.
+ */
 function checkTie() {
-    for (let r = 0; r<rectangles.length;r++) {
-        for (let c = 0; c<rectangles[r].length;c++) {
+    for (let r = 0; r < rectangles.length; r++) {
+        for (let c = 0; c < rectangles[r].length; c++) {
             if (rectangles[r][c].content == 0) {
                 return;
             }
@@ -93,6 +96,7 @@ function checkTie() {
     window.alert("The game was a tie");
     resetGame();
 }
+
 /**
  * The setup method for initializing the game components including canvas and the rectangles.
  */
@@ -100,28 +104,37 @@ function setup() {
     createCanvas(WIDTH, HEIGHT);
     setRectangles();
 }
-/**
- * The mouse pressed method.
- */
-function mousePressed() {
+
+function makeAmove() {
     for (let r = 0; r < rectangles.length; r++) {
         for (let c = 0; c < rectangles[r].length; c++) {
             let curr = rectangles[r][c];
             if (rectangleCollidedWithRectangle(curr.x, curr.y, curr.width, curr.height, mouseX, mouseY, 0, 0)) {
-                if (turn) {
-                    rectangles[r][c].content = 1;
-                } else rectangles[r][c].content = 2;
+                if (curr.content == 0) {
+                    if (turn) {
+                        rectangles[r][c].content = 1;
+                    } else rectangles[r][c].content = 2;
 
-                if (turn) {
-                    turn = false;
-                } else turn = true;
+                    if (turn) {
+                        turn = false;
+                    } else turn = true;
+                    return;
+                }
+
             }
         }
     }
+}
+
+/**
+ * The mouse pressed method.
+ */
+function mousePressed() {
+    makeAmove();
     checkWin();
     checkTie();
-
 }
+
 /**
  * The draw method.
  */
@@ -134,9 +147,8 @@ function draw() {
                 fill(255, 255, 255);
             } else if (cur.content == 1) {
                 fill(255, 0, 0);
-            } else fill(0, 255, 0);
+            } else fill(0, 0, 255);
             rect(cur.x, cur.y, cur.width, cur.height);
         }
     }
-
 }
