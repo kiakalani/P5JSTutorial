@@ -29,7 +29,7 @@ class Menu {
     constructor() {
         this.stars = [];
         for (let i = 0; i < nextInt(100, 200); i++) {
-            this.stars.push(new CoolStar(nextInt(0, MENUWIDTH), nextInt(0, MENUHEIGHT)));
+            this.stars.push({x: nextInt(0, MENUWIDTH), y: nextInt(0, MENUHEIGHT)});
         }
         this.collisionDetector = new CollisionDetector();
     }
@@ -69,7 +69,7 @@ class Menu {
     render() {
         background(5);
         for (let i = 0; i < this.stars.length; i++) {
-            this.stars[i].render();
+            circle(this.stars[i].x, this.stars[i].y, nextInt(1,4));
         }
     }
 
@@ -77,9 +77,7 @@ class Menu {
      * Updating the page.
      */
     update() {
-        for (let i = 0; i < this.stars.length; i++) {
-            this.stars[i].update();
-        }
+        
     }
 }
 /**
@@ -169,7 +167,6 @@ class MainMenu extends Menu {
      */
     mouseHitOption() {
         for (let i = 0; i < this.options.length; i++) {
-            console.log("Looping");
             let x = 230;
             let y = 230 + ((i) * 50);
             let width = 25 * this.options[i].length;
@@ -226,51 +223,6 @@ class About extends Menu {
  */
 class GamePage extends Menu {
 
-    /**
-     * The constructor
-     */
-    constructor() {
-        super();
-        this.player = new Player(500, 650);
-        this.mobs = new MobGenerator();
-    }
-
-    /**
-     * The method that renders the 
-     */
-    render() {
-        super.render();
-        this.player.render();
-        this.mobs.render();
-    }
-
-    /**
-     * This method would be invoked when the key is pressed.
-     */
-    handleKeyPressed() {
-        super.handleKeyPressed();
-        this.player.handleKeyPressed();
-    }
-
-    /**
-     * This method is responsible for updating the contents of the game.
-     */
-    update() {
-        super.update();
-        this.player.update();
-        this.mobs.update();
-        this.player.bulletHitMob(this.mobs.mobs, this.collisionDetector);
-        this.player.mobHitPlayer(this.mobs.mobs, this.collisionDetector);
-    }
-
-    /**
-     * This method would be invoked when the key is released.
-     */
-    handleKeyReleased() {
-        super.handleKeyReleased();
-        this.player.handleKeyReleased();
-    }
-
 }
 
 /**
@@ -283,8 +235,6 @@ class Instructions extends Menu {
      */
     constructor() {
         super();
-        this.leftImg = loadImage('img/back.png');
-        this.rightImg = loadImage('img/forward.png');
     }
 
     /**
@@ -295,8 +245,6 @@ class Instructions extends Menu {
         fill('green');
         textSize(30);
         text("Press 'A' or 'D' to move left or right\nPress 'Space' to shoot towards the aliens.\n Don't let them collide with your ship", 200, 200);
-        image(this.leftImg, 20, 700, 50, 30);
-        image(this.rightImg, 960, 700, 50, 30);
     }
 
     /**
@@ -314,11 +262,7 @@ class Instructions extends Menu {
      * This method handles the events related to the mouse being pressed.
      */
     handleMousePressed() {
-        if (this.collisionDetector.collidedRectWithPoint(20, 700, 50, 30, mouseX, mouseY)) {
-            changeCurrentScene(new MainMenu());
-        } else if (this.collisionDetector.collidedRectWithPoint(960, 700, 50, 30, mouseX, mouseY)) {
-            changeCurrentScene(new GamePage());
-        }
+        
     }
 
 }
