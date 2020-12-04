@@ -1,0 +1,6 @@
+- Introduction to p5js with the syntax of making it.
+- Collision detection concept necessary for p5js.
+- Theory behind the game entities
+- Making a simple object shown into the page.
+- Keyboard events
+- Mouse events

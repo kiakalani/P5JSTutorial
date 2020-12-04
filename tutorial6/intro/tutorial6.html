@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>tutorial6.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tutorial-6">Tutorial 6</h1>
+<h3 id="author-kia-kalani">Author: Kia Kalani</h3>
+<h3 id="contributors-ali-lezzaik-alireza-teimoori">Contributors: Ali Lezzaik, Alireza Teimoori</h3>
+<h2 id="introduction">Introduction</h2>
+<p>The main focus of this tutorial is to make the enemies and the bullet. Additionally, by the end of this tutorial you should expect to be able to make a basic space invader game and if necessary expand the components of it.</p>
+<h2 id="bullets">Bullets</h2>
+<p>In order to make this game more aesthetically appealing, we will be using images to load the bullets. Therefore we are going to make a simple <code>Bullet</code> class that extends our <code>GameObject</code> that we created earlier on. Same as the player, we would have x, y, width and height components for this object. The code is straightforward for making the bullet. For updating the bullets, we essentially subtract 20 from the bullet y position so it goes up. Therefore, in terms of code, it would look similar to the following:</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bullet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">GameObject</span></span>{
+    
+    <span class="hljs-keyword">constructor</span>(x,y) {
+        <span class="hljs-keyword">super</span>(x,y);
+        <span class="hljs-keyword">this</span>.image = loadImage(<span class="hljs-string">'img/bullet.jpg'</span>);
+        <span class="hljs-keyword">this</span>.width = <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">this</span>.height = <span class="hljs-number">30</span>;
+    }
+    
+    render() {
+        image(<span class="hljs-keyword">this</span>.image, <span class="hljs-keyword">this</span>.x, <span class="hljs-keyword">this</span>.y, <span class="hljs-keyword">this</span>.width, <span class="hljs-keyword">this</span>.height);
+    }
+   
+    update() {
+        <span class="hljs-keyword">this</span>.y -= <span class="hljs-number">20</span>;
+    }
+}
+</div></code></pre>
+<h3 id="a-simple-game-list-implementation">A simple Game List Implementation</h3>
+<p>By having the bullet class done, we are going to move onto implementing it inside the player class. Before doing so, we need a  list implementation in order to have multiple bullets inside the game. Although the implementation we are going to use is not the most efficient, it will be sufficient enough for a simple game such as space invader. We would essentially use an array and push and remove elements to it.  Inside the constructor, we define an empty array. Additionally, for adding an element we are going to make a call to the push method. However, for removing an element, we would deal with it the same as we would deal with the array lists. Essentially, we store the object into a variable and shift everything down by one. In terms of code, it would look like the following:</p>
+<pre class="hljs"><code><div>    remove(index) {
+        <span class="hljs-keyword">let</span> len = <span class="hljs-keyword">this</span>.__items.length;
+        <span class="hljs-keyword">let</span> element = <span class="hljs-keyword">this</span>.__items[index];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = index;i&lt;len<span class="hljs-number">-1</span>;i++) {
+            <span class="hljs-keyword">this</span>.__items[i] = <span class="hljs-keyword">this</span>.__items[i+<span class="hljs-number">1</span>]; 
+        }
+        <span class="hljs-keyword">this</span>.__items.pop();
+        <span class="hljs-keyword">return</span> element;
+    }
+</div></code></pre>
+<p>Finally for getting the size of the elements, we would return the length of the items inside the array.</p>
+<h3 id="creating-bullets-within-the-game">Creating Bullets Within the Game</h3>
+<p>By having our <code>GameList</code> class, we can now get into defining the bullets functionality within the player. We would now create a <code>GameList</code> for bullets. This can be done inside the constructor. By having that defined, now we would have to render all of the bullets inside the gamelist element we have defined. We essentially loop for all of the bullets and render them like the following code:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i =<span class="hljs-number">0</span>;i&lt; <span class="hljs-keyword">this</span>.bullets.size();i++) {	
+    <span class="hljs-keyword">this</span>.bullets.get(i).render();
+}
+</div></code></pre>
+<p>Additionally, we apply the same concept to update the bullet positions.</p>
+<p>However, the bullets still do not exist. Therefore, we would want to have a bullet appear whenever we release our space key. In order to do so, we make a small modification to the switch case we had for the player movement. we are going to add the following code to it.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">case</span> <span class="hljs-string">" "</span>:
+	<span class="hljs-keyword">this</span>.bullets.add(<span class="hljs-keyword">new</span> Bullet(<span class="hljs-keyword">this</span>.x+ (<span class="hljs-keyword">this</span>.width/<span class="hljs-number">2</span>), <span class="hljs-keyword">this</span>.y));
+	<span class="hljs-keyword">break</span>;
+</div></code></pre>
+<p>This way, a bullet would appear in the middle of the player and would start moving up. Everything seems fine; however, there is one slight issue. The bullets would never get removed and keep going infinitely. In other words, we have to destroy the bullets when they go above the point <code>-height</code> of them. That way, the game would not end up crashing due to running out of memory.   For doing that we are going to modify the <code>update</code> method of the player and add the following to it.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-keyword">this</span>.bullets.size()<span class="hljs-number">-1</span>; i &gt;<span class="hljs-number">-1</span>;i--) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.bullets.get(i).y &lt; <span class="hljs-number">-30</span>) {
+        <span class="hljs-keyword">this</span>.bullets.remove(i);
+    }
+}
+</div></code></pre>
+<p>You may wonder why a loop in the opposite way? The answer is simple. If we move from the front and remove a bullet, a bullet can be removed and the items would shift one down. That is a problem because when they shift down, some of those bullets would be disregarded and not removed. At this point we have our bullet fully functional. Now we need to get to other components of the game.</p>
+<h2 id="mobs">Mobs</h2>
+<p>Mobs or the so called invaders are the objects we are going to be making within the game. Mobs are just like the bullets but they come from the opposite side and have four components of x, y, width, and height. We have almost gone into the whole idea of making them. Therefore, we are going to skip from the methodology of making them. Instead, we need to figure out a way to make the mobs come from the other side in a random time passage. The simplest way is to use the current time of the system in milliseconds. However, for implementation of it, we are going to create a class called <code>MobGenerator</code>. Now we do need the components of the <code>GameObject</code> for this class but there is no need for the x and y position. This class needs three main components. The first one is a <code>GameList</code> that would be containing all of the mobs. The second one is the current time and third one is in milliseconds how many seconds we want to wait before generating a new mob. The current time in milliseconds would be derived from the following method:</p>
+<pre class="hljs"><code><div>getCurrentTimeMiliSeconds() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime();
+}
+</div></code></pre>
+<p>We first have to render and update the mobs the same way we have done inside the <code>player</code> class through <code>render</code> and <code>update</code> methods. Afterwards, we would need to make a method for adding mobs to the mobs list. This can be done by comparing the current time with the time we had saved inside the constructor and if it is more than the milliseconds we had defined as a random value, we would essentially update the value of the time inside the constructor with the current time and update the random number of milliseconds with a new random value and add a mob in a random position inside the canvas in terms of x and <code>-height</code> for the y coordinate. In terms of code, it can look similar to the following:</p>
+<pre class="hljs"><code><div>addMob() {
+    <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">this</span>.getCurrentTimeMiliSeconds() - <span class="hljs-keyword">this</span>.now &gt;= <span class="hljs-keyword">this</span>.howManySeconds) {
+        <span class="hljs-keyword">this</span>.now = <span class="hljs-keyword">this</span>.getCurrentTimeMiliSeconds();
+        <span class="hljs-keyword">this</span>.howManySeconds = nextInt(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>)*<span class="hljs-number">1000</span>;
+        <span class="hljs-keyword">this</span>.mobs.add(<span class="hljs-keyword">new</span> Mob(nextInt(<span class="hljs-number">1</span>,MENUWIDTH) - <span class="hljs-number">80</span>, <span class="hljs-number">-80</span>));
+    }
+}
+</div></code></pre>
+<p>Now we can add this method inside the update method to make sure this class would keep adding mobs by the passage of time. Now we will define an instance of this class inside the <code>GamePage</code> menu and do all of the events related to it. By running the <code>index.html </code> you notice that the game has mobs and  you can shoot at them. However, we still have not implemented any method to handle the case when bullets collide with the mobs.</p>
+<h3 id="making-bullets-hit-mobs">Making Bullets Hit Mobs</h3>
+<p>For making the bullets removed and the mobs removed by bullet collision and increasing points, we need to make a method within the player class called <code>bulletHitMob</code> which would take the collision detector and the mobs as parameters. It will remove the bullets and the mobs that have collided with each other and adds 5 points to the player's score. The idea of reverse looping has been specified before. We would just do nested loops to check for the collision and remove the collided elements. The code would end up looking like the following:</p>
+<pre class="hljs"><code><div>bulletHitMob(mobs, collDetector) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = mobs.size() <span class="hljs-number">-1</span>; i &gt; <span class="hljs-number">-1</span>;i--) {
+        <span class="hljs-keyword">let</span> mob = mobs.get(i);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-keyword">this</span>.bullets.size() <span class="hljs-number">-1</span>; j &gt; <span class="hljs-number">-1</span>; j--) {
+            <span class="hljs-keyword">let</span> bullet = <span class="hljs-keyword">this</span>.bullets.get(j);
+            <span class="hljs-keyword">if</span> (collDetector.collidedRects(mob.x,mob.y, mob.width, mob.height, bullet.x, bullet.y, bullet.width, bullet.height)) {
+                mobs.remove(i);
+                <span class="hljs-keyword">this</span>.bullets.remove(j);
+                <span class="hljs-keyword">this</span>.score += <span class="hljs-number">5</span>;
+            }
+        }
+    }
+}
+</div></code></pre>
+<p>Now we would call this method inside the update method of the <code>GamePage</code> and pass in the mobs list from the mob generator and the collision detector of the menu as arguments. Running the game again, the player can now shoot and increase his score accordingly. However, now this game has no losing condition.</p>
+<h3 id="making-a-losing-condition">Making a Losing Condition</h3>
+<p>We can implement a life element for the player and make the player lose by losing all of the lives. However, that would be an additional element that could be implemented accordingly and we would just give the player 1 life in the whole game. The simple way of checking for the lose condition is exactly the same as checking for the bullets condition. However, this time there would be a single loop that would remove the mob and change the scene to <code>GameOVer</code> if the mob collides with the player.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Using <code>p5js</code> for making games is a convenient idea due to having bunch of built in functionalities that can be used to make really impressive contents. Although making a game such as space invader is relatively simple and does not need to much experience in programming, is a good practice for improvement of JavaScript skills and teaching different built ins that <code>p5js</code> provides.</p>
+<p>For gaining access to the source code, please refer to:</p>
+
+</body>
+</html>
